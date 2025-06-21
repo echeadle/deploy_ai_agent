@@ -192,3 +192,7 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# My Additions
+#  Add any additional files or directories you want to ignore here.
+.env.sample

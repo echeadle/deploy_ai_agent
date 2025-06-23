@@ -14,6 +14,8 @@ services:
             - .env.sample
         volumes:
             - ./backend/src:/app
+        depends_on:
+            - db_service
         develop:
             watch:
                 - action: rebuild
@@ -22,13 +24,24 @@ services:
                   path: backend/requirements.txt
                 - action: restart
                   path: backend/src/
-    static_html:
-        #image: python:3.13.4-slim-bullseye
-        build:
-            context: ./static_html
-            dockerfile: static.Dockerfile
+    db_service:
+        image: postgres:17.5
         ports:
-            - 8888:8000
-        command: python -m http.server 8000
+            - 5432:5432
+        env_file:
+            - .env.sample-db
         volumes:
-            - ./static_html/src:/app
+            - dc_managed_db_data:/var/lib/postgresql/data
+
+volumes:
+    dc_managed_db_data:
+    # static_html:
+    #     #image: python:3.13.4-slim-bullseye
+    #     build:
+    #         context: ./static_html
+    #         dockerfile: static.Dockerfile
+    #     ports:
+    #         - 8888:8000
+    #     command: python -m http.server 8000
+    #     volumes:
+    #         - ./static_html/src:/app

@@ -1,9 +1,10 @@
-fastapi==0.115.13
+fastapi==0.115.12
 uvicorn[standard]
 requests
 sqlmodel 
 psycopg[binary]
-langgraph
+sqlalchemy
+# langgraph
 # langgraph-supervisor
 # langchain
 # langchain-openai
